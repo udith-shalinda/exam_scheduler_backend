@@ -65,6 +65,7 @@ function exceptionHandler(): (
 ) => PropertyDescriptor {
   return function (
     _target: object,
+    // @ts-ignore
     functionName: string,
     descriptor: PropertyDescriptor
   ) {
