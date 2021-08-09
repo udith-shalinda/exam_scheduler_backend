@@ -5,6 +5,7 @@
  * @Last Modified time: 2021-07-23 12:28:10
  */
 import { CommonService } from './../services/common/common.service';
+import { DbConnection, getDbConnection } from './dbContext/_dbContext';
 import { UnAuthorizedException } from './exceptionManager';
 // import { JwtPayload } from 'jsonwebtoken';
 // import { UserService } from '../../services/user/user.service';
@@ -38,11 +39,11 @@ function authenticationHandler(): (
       }
       // const _logger: Logger = new Logger();
 
-      // const dbConnection: DbConnection = getDbConnection();
-      // const user = await new UserService(_logger, dbConnection).getUserByUsername(decode.username);
-      // if (!user) {
-      //   throw new UnAuthorizedException('401', 'Unauthorized Action, Invalid Token');
-      // }
+      const dbConnection: DbConnection = getDbConnection();
+      const user = await new UserService(dbConnection).getUserByUsername(decode.username);
+      if (!user) {
+        throw new UnAuthorizedException('Unauthorized Action, Invalid Token');
+      }
 
       args[0].user = decode;
       // tslint:disable-next-line: no-invalid-this
