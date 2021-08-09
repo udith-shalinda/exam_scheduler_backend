@@ -1,0 +1,12 @@
+# package directories
+node_modules
+lib
+yarn.lock
+package-lock.json
+.env
+
+# Serverless directories
+.serverless
+
+# Webpack directories
+.webpack
