@@ -1,4 +1,5 @@
 import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { Hall } from "./hall.model";
 import { Subject } from "./subject.model";
 
 @Table({ underscored: true, tableName: "exam" })
@@ -18,34 +19,9 @@ export class Exam extends Model<Exam> {
   })
   public name!: string;
 
-  @Column({
-    type: DataType.INTEGER(),
-    allowNull: false,
-    unique: false,
-  })
-  public mainYear!: number;
-
-  @Column({
-    type: DataType.STRING({ length: 100 }),
-    allowNull: false,
-    unique: false,
-  })
-  public repeatedYears!: string;
-
-  @Column({
-    type: DataType.INTEGER(),
-    allowNull: false,
-    unique: false,
-  })
-  public time!: number;
-
-  @Column({
-    type: DataType.INTEGER(),
-    allowNull: false,
-    unique: false,
-  })
-  public stu_count!: number;
-
   @HasMany(() => Subject, { foreignKey: "examId" })
   public all_subjects!: Subject[];
+
+  @HasMany(() => Hall, { foreignKey: "examId" })
+  public allHalls!: Hall[];
 }

@@ -4,6 +4,7 @@
  * @Last Modified by: Hasi6 (hasitha.chandula@gmail.com)
  * @Last Modified time: 2021-07-23 12:28:10
  */
+import { UserService } from 'src/services/user/user.service';
 import { CommonService } from './../services/common/common.service';
 import { DbConnection, getDbConnection } from './dbContext/_dbContext';
 import { UnAuthorizedException } from './exceptionManager';
@@ -40,7 +41,7 @@ function authenticationHandler(): (
       // const _logger: Logger = new Logger();
 
       const dbConnection: DbConnection = getDbConnection();
-      const user = await new UserService(dbConnection).getUserByUsername(decode.username);
+      const user = await new UserService(dbConnection).getUserByEmail(decode.email);
       if (!user) {
         throw new UnAuthorizedException('Unauthorized Action, Invalid Token');
       }

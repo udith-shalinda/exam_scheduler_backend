@@ -2,6 +2,7 @@ import type { AWS } from '@serverless/typescript';
 
 import hello from '@functions/hello';
 import user from '@functions/user/user.serverless';
+import exam from '@functions/exam/exam.serverless';
 
 const serverlessConfiguration: AWS = {
   service: 'exam-scheduler-backend',
@@ -28,7 +29,8 @@ const serverlessConfiguration: AWS = {
   // import the function via paths
   functions: { 
     ...hello,
-    ...user
+    ...user,
+    ...exam
    },
 };
 

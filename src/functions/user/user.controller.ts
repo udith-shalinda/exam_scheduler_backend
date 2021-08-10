@@ -1,9 +1,8 @@
 import { formatJSONResponse } from "@libs/apiGateway";
-import { AuthenticationHandler } from "@libs/authenticationHandler";
 import { HandleException } from "@libs/exceptionManager";
-import { APIGatewayProxyEvent, Context } from "aws-lambda";
+import { Context } from "aws-lambda";
 import { UserService } from "src/services/user/user.service";
-import { ILoginRes, ILoginUser, IUser } from "./user.interface";
+import { ILoginRes, ILoginUser } from "./user.interface";
 
 export class UserController {
   constructor(private readonly _userService: UserService) {

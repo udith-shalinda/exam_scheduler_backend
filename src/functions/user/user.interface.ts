@@ -5,6 +5,7 @@ export interface ICreateUser{
 }
 
 export interface IUser{
+    id: number;
     username: string;
     email: string;
 }

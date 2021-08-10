@@ -29,6 +29,34 @@ export class Subject extends Model<Subject> {
     allowNull: false,
     unique: false,
   })
+  public mainYear!: number;
+
+  @Column({
+    type: DataType.STRING({ length: 100 }),
+    allowNull: false,
+    unique: false,
+  })
+  public repeatedYears!: string;
+
+  @Column({
+    type: DataType.INTEGER(),
+    allowNull: false,
+    unique: false,
+  })
+  public time!: number;
+
+  @Column({
+    type: DataType.INTEGER(),
+    allowNull: false,
+    unique: false,
+  })
+  public stu_count!: number;
+
+  @Column({
+    type: DataType.INTEGER(),
+    allowNull: false,
+    unique: false,
+  })
   public examId!: number;
 
   @BelongsTo(() => Exam, {
