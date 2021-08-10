@@ -4,11 +4,11 @@ import {
   DbContext,
   Op,
   Repository,
-} from "@libs/dbContext/_dbContext";
+} from "src/shared/dbContext/_dbContext";
 import {
   BadRequestException,
   UnAuthorizedException,
-} from "@libs/exceptionManager";
+} from "src/shared/exceptionManager";
 import { User } from "src/models";
 import { CommonService } from "../common/common.service";
 
