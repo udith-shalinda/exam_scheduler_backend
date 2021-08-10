@@ -3,6 +3,7 @@ import type { AWS } from '@serverless/typescript';
 import hello from '@functions/hello';
 import user from '@functions/user/user.serverless';
 import exam from '@functions/exam/exam.serverless';
+import subject from '@functions/subject/subject.serverless';
 
 const serverlessConfiguration: AWS = {
   service: 'exam-scheduler-backend',
@@ -30,7 +31,8 @@ const serverlessConfiguration: AWS = {
   functions: { 
     ...hello,
     ...user,
-    ...exam
+    ...exam,
+    ...subject
    },
 };
 

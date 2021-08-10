@@ -33,7 +33,7 @@ export class Subject extends Model<Subject> {
 
   @Column({
     type: DataType.STRING({ length: 100 }),
-    allowNull: false,
+    allowNull: true,
     unique: false,
   })
   public repeatedYears!: string;
