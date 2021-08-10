@@ -1,5 +1,5 @@
-import { DbConnection, getDbConnection } from "@libs/dbContext/_dbContext";
-import { middyfy } from "@libs/lambda";
+import { DbConnection, getDbConnection } from "src/shared/dbContext/_dbContext";
+import { middyfy } from "src/shared/lambda";
 import { ExamService } from "src/services/exam/exam.service";
 import { ExamController } from "./exam.controller";
 

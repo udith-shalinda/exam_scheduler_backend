@@ -1,5 +1,5 @@
-import { formatJSONResponse } from "@libs/apiGateway";
-import { HandleException } from "@libs/exceptionManager";
+import { formatJSONResponse } from "src/shared/apiGateway";
+import { HandleException } from "src/shared/exceptionManager";
 import { Context } from "aws-lambda";
 import { UserService } from "src/services/user/user.service";
 import { ILoginRes, ILoginUser } from "./user.interface";

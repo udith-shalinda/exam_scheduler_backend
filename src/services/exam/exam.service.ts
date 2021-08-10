@@ -3,11 +3,11 @@ import {
   DbConnection,
   DbContext,
   Repository,
-} from "@libs/dbContext/_dbContext";
+} from "src/shared/dbContext/_dbContext";
 import {
   BadRequestException,
   InternalServerException,
-} from "@libs/exceptionManager";
+} from "src/shared/exceptionManager";
 import { Exam } from "src/models";
 
 export class ExamService {

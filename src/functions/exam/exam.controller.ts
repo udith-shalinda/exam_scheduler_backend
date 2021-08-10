@@ -1,6 +1,6 @@
-import { formatJSONResponse } from "@libs/apiGateway";
-import { AuthenticationHandler } from "@libs/authenticationHandler";
-import { HandleException } from "@libs/exceptionManager";
+import { formatJSONResponse } from "src/shared/apiGateway";
+import { AuthenticationHandler } from "src/shared/authenticationHandler";
+import { HandleException } from "src/shared/exceptionManager";
 import { Context } from "aws-lambda";
 import { ExamService } from "src/services/exam/exam.service";
 import { ICreateExam, IExam } from "./exam.interface";

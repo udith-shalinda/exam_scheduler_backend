@@ -1,4 +1,4 @@
-import { DbConnection, getDbConnection } from "@libs/dbContext/_dbContext";
+import { DbConnection, getDbConnection } from "src/shared/dbContext/_dbContext";
 
 const migrate = async () => {
   try {

@@ -1,5 +1,5 @@
 import schema from "./schema";
-import { handlerPath } from "@libs/handlerResolver";
+import { handlerPath } from "src/shared/handlerResolver";
 
 export default {
   hello: {
