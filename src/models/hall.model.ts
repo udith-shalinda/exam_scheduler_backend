@@ -39,5 +39,5 @@ export class Hall extends Model<Hall> {
   public exam!: Exam;
 
   @HasMany(() => Av_Date, { foreignKey: "hallId" })
-  public all_Av_Datess!: Av_Date[];
+  public all_Av_Dates!: Av_Date[];
 }
