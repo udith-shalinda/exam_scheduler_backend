@@ -36,7 +36,7 @@ export class ExamController {
   @HandleException()
   @AuthenticationHandler()
   public async deleteExam(event: any, _context: Context) {
-    const res = await this._examService.deleteExam(event.body);
+    const res = await this._examService.deleteExam(event.pathParameters.id);
     return formatJSONResponse({ data: res });
   }
 }

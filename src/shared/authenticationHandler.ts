@@ -24,9 +24,8 @@ function authenticationHandler(): (
       // Execute the actual method wrapped in the audit decorator and get the output
       // tslint:disable-next-line: no-invalid-this
 
-      console.log();
 
-      const token = args[0]?.headers.Authorization;
+      const token = args[0]?.headers.Authorization || args[0]?.headers.authorization;
 
       if (!token) {
         console.log('token not found');

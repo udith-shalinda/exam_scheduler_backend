@@ -39,7 +39,7 @@ export default {
       {
         http: {
           method: "delete",
-          path: "deleteExam",
+          path: "deleteExam/{id}",
         //   request: {
         //     schema: {
         //       "application/json": schema,

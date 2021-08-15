@@ -15,7 +15,7 @@ export class Exam extends Model<Exam> {
   @Column({
     type: DataType.STRING({ length: 100 }),
     allowNull: false,
-    unique: false,
+    unique: true,
   })
   public name!: string;
 
