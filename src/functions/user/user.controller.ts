@@ -3,6 +3,7 @@ import { HandleException } from "src/shared/exceptionManager";
 import { Context } from "aws-lambda";
 import { UserService } from "src/services/user/user.service";
 import { ILoginRes, ILoginUser } from "./user.interface";
+import { AuthenticationHandler } from "src/shared/authenticationHandler";
 
 export class UserController {
   constructor(private readonly _userService: UserService) {
@@ -19,6 +20,11 @@ export class UserController {
     const body: ILoginUser = event.body;
     const data: ILoginRes = await this._userService.login(body);
     return formatJSONResponse({ data });
+  }
+  @HandleException()
+  @AuthenticationHandler()
+  public async whoAmI(event: any, _context: Context) {
+    return formatJSONResponse({ user: event.user });
   }
   /**
    * async login

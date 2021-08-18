@@ -9,3 +9,4 @@ const _userController = new UserController(_userService);
 
 export const login = middyfy(_userController.login);
 export const register = middyfy(_userController.register);
+export const whoAmI = middyfy(_userController.whoAmI);

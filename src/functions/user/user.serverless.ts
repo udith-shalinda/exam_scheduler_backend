@@ -33,4 +33,20 @@ export default {
       },
     ],
   },
+  whoAmI: {
+    handler: `${handlerPath(__dirname)}/index.whoAmI`,
+    events: [
+      {
+        http: {
+          method: "get",
+          path: "whoAmI",
+        //   request: {
+        //     schema: {
+        //       "application/json": schema,
+        //     },
+        //   },
+        },
+      },
+    ],
+  },
 };
