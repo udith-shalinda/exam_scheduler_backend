@@ -11,7 +11,7 @@ import { Model, Sequelize } from "sequelize-typescript";
 import pg from "pg";
 
 import { ConfigurationException } from "../exceptionManager";
-import { User, Exam, Subject, Hall, Av_Date, Av_Time } from "../../models";
+import { User, Exam, Subject, Hall, Av_Date, Av_Time, TimeTable } from "../../models";
 type DbContext = Sequelize;
 type TransactionScope = Transaction;
 type Repository<M> = (new () => M) & NonAbstract<typeof Model>;
@@ -69,7 +69,7 @@ function createSequelizeConnection(): Sequelize {
     {
       dialect: "postgres",
       dialectOptions: { connectTimeout: 60000 },
-      models: [User, Exam, Subject, Hall, Av_Date, Av_Time],
+      models: [User, Exam, Subject, Hall, Av_Date, Av_Time, TimeTable],
     }
   );
 }

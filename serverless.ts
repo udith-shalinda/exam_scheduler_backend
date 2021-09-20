@@ -5,6 +5,8 @@ import user from '@functions/user/user.serverless';
 import exam from '@functions/exam/exam.serverless';
 import subject from '@functions/subject/subject.serverless';
 import hall from '@functions/hall/hall.serverless';
+import timeTable from '@functions/time_table/time_table.serverless';
+
 
 const serverlessConfiguration: AWS = {
   service: 'exam-scheduler-backend',
@@ -34,7 +36,8 @@ const serverlessConfiguration: AWS = {
     ...user,
     ...exam,
     ...subject,
-    ...hall
+    ...hall,
+    ...timeTable
    },
 };
 
