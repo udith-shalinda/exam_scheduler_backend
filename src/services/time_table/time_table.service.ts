@@ -2,6 +2,7 @@ import {
   ICreateTimeTable,
   ITimeTable,
 } from "@functions/time_table/time_table.interface";
+import { Subject } from "src/models";
 import { TimeTable } from "src/models/time_table.model";
 import {
   DbConnection,
@@ -82,7 +83,7 @@ export class TimeTableService {
     const TimeTableRepo: Repository<TimeTable> =
       await this._dbContext.getRepository(TimeTable);
     try {
-      return await TimeTableRepo.findAll({ where: {examId}});
+      return await TimeTableRepo.findAll({ where: {examId},include: [{model: Subject, as: 'subject'}], order: [['date', 'ASC'], ['start', 'ASC']]});
     } catch (error) {
       throw new InternalServerException("Finding all TimeTables failed");
     }

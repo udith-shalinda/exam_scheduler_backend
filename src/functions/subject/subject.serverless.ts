@@ -65,4 +65,20 @@ export default {
       },
     ],
   },
+  getAllTimeTableByYear: {
+    handler: `${handlerPath(__dirname)}/index.getAllTimeTableByYear`,
+    events: [
+      {
+        http: {
+          method: "get",
+          path: "getAllTimeTableByYear/{id}/{year}",
+        //   request: {
+        //     schema: {
+        //       "application/json": schema,
+        //     },
+        //   },
+        },
+      },
+    ],
+  },
 };

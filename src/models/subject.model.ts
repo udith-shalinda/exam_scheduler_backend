@@ -2,9 +2,11 @@ import {
   BelongsTo,
   Column,
   DataType,
+  HasOne,
   Model,
   Table,
 } from "sequelize-typescript";
+import { TimeTable } from ".";
 import { Exam } from "./exam.model";
 
 @Table({ underscored: true, tableName: "subject" })
@@ -64,4 +66,7 @@ export class Subject extends Model<Subject> {
     onDelete: "cascade",
   })
   public exam!: Exam;
+
+  @HasOne(() => TimeTable, { foreignKey: "subjectId" })
+  public timetable!: TimeTable;
 }

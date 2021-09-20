@@ -9,6 +9,7 @@ export class SubjectController {
   constructor(private readonly _SubjectService: SubjectService) {
     this.createSubject = this.createSubject.bind(this);
     this.getAllSubjectsByExam = this.getAllSubjectsByExam.bind(this);
+    this.getAllTimeTableByYear = this.getAllTimeTableByYear.bind(this);
     this.updateSubject = this.updateSubject.bind(this);
     this.deleteSubject = this.deleteSubject.bind(this);
   }
@@ -21,6 +22,12 @@ export class SubjectController {
     return formatJSONResponse({ data });
   }
 
+  @HandleException()
+  @AuthenticationHandler()
+  public async getAllTimeTableByYear(event: any, _context: Context) {    
+    const res = await this._SubjectService.getAllTimeTableByYear(event.pathParameters.id, event.pathParameters.year);
+    return formatJSONResponse({ data: res });
+  }
   @HandleException()
   @AuthenticationHandler()
   public async getAllSubjectsByExam(event: any, _context: Context) {

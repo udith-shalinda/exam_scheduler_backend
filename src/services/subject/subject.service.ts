@@ -8,7 +8,8 @@ import {
   BadRequestException,
   InternalServerException,
 } from "src/shared/exceptionManager";
-import { Subject } from "src/models";
+import { Subject, TimeTable } from "src/models";
+import { ITimeTable } from "@functions/time_table/time_table.interface";
 
 export class SubjectService {
   private readonly _dbContext: DbContext = this._dbConnection.dbContext;
@@ -70,6 +71,31 @@ export class SubjectService {
     try {
       return await SubjectRepo.findAll({ where: { examId: id }, order: [['time', 'ASC']] } );
     } catch (error) {
+      console.log(error);
+      throw new InternalServerException("Finding all Subjects failed");
+    }
+  }
+  public async getAllTimeTableByYear(id: number, year: number): Promise<ITimeTable[]> {
+    
+    const SubjectRepo: Repository<Subject> = await this._dbContext.getRepository(
+      Subject
+    );
+    try {
+      const data = await SubjectRepo.findAll({ where: { examId: id, mainYear: year }, include: [{
+        model: TimeTable,
+        as: 'timetable',
+        include: [
+          {
+            model: Subject,
+            as: 'subject'
+          }
+        ]
+      }] } );
+      return data.map((sub: ISubject) => {
+        return sub.timetable;
+      })
+    } catch (error) {
+      console.log(error);
       throw new InternalServerException("Finding all Subjects failed");
     }
   }

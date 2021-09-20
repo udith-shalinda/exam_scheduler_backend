@@ -11,4 +11,6 @@ export const createSubject = middyfy(_SubjectController.createSubject);
 export const updateSubject = middyfy(_SubjectController.updateSubject);
 export const deleteSubject = middyfy(_SubjectController.deleteSubject);
 export const getAllSubjectsByExam = middyfy(_SubjectController.getAllSubjectsByExam);
+export const getAllTimeTableByYear = middyfy(_SubjectController.getAllTimeTableByYear);
+
 

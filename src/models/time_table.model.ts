@@ -55,7 +55,7 @@ export class TimeTable extends Model<TimeTable> {
   @Column({
     type: DataType.INTEGER(),
     allowNull: false,
-    unique: false,
+    unique: true,
   })
   public subjectId!: number;
 
