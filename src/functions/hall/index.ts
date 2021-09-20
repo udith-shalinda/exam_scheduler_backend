@@ -11,4 +11,5 @@ export const createHall = middyfy(_HallController.createHall);
 export const updateHall = middyfy(_HallController.updateHall);
 export const deleteHall = middyfy(_HallController.deleteHall);
 export const getAllHallsByExam = middyfy(_HallController.getAllHallsByExam);
+export const getOneHallById = middyfy(_HallController.getOneHallById);
 

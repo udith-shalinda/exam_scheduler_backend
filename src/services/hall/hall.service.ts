@@ -77,7 +77,7 @@ export class HallService {
     //   Hall
     // );
     try {
-      const [results, metadata] = await this._dbContext.query(`select a.name, a.seats_count, a.date, a.hall_id, a.av_date_id, av_time.start, av_time.end from (SELECT hall.name, hall.seats_count, av_date.date, av_date.hall_id, av_date.id as av_date_id from hall left join av_date on hall.id = av_date.hall_id  where hall.exam_id = ${id} ) as a left join av_time on a.av_date_id = av_time.av_date_id
+      const [results, metadata] = await this._dbContext.query(`select a.name, a.seats_count, a.date, a.hall_id, a.av_date_id, av_time.id as av_time_id, av_time.start, av_time.end from (SELECT hall.name, hall.seats_count, av_date.date, av_date.hall_id, av_date.id as av_date_id from hall left join av_date on hall.id = av_date.hall_id  where hall.exam_id = ${id} ) as a left join av_time on a.av_date_id = av_time.av_date_id
       order by a.seats_count asc, a.date asc;`)
       // console.log(results)
       return results;
@@ -92,6 +92,28 @@ export class HallService {
       // }]});
     } catch (error) {
       throw new InternalServerException("Finding all Halls failed");
+    }
+  }
+  public async getOneHallById(id: number): Promise<any> {
+    
+    const _HallRepo: Repository<Hall> = await this._dbContext.getRepository(
+      Hall
+    );
+    try {
+      return await _HallRepo.findOne({ where: { id: id }
+        , include: [{
+        model: Av_Date,
+        as: 'all_Av_Dates',
+        
+        include: [{
+          model: Av_Time,
+          as: 'all_Av_Times'
+        }]
+      }]
+    });
+    } catch (error) {
+      console.log(error);
+      throw new InternalServerException("Finding Hall by id failed");
     }
   }
 }

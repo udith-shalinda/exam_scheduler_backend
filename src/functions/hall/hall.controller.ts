@@ -11,6 +11,7 @@ export class HallController {
     this.getAllHallsByExam = this.getAllHallsByExam.bind(this);
     this.updateHall = this.updateHall.bind(this);
     this.deleteHall = this.deleteHall.bind(this);
+    this.getOneHallById = this.getOneHallById.bind(this);
   }
 
   @HandleException()
@@ -25,6 +26,12 @@ export class HallController {
   @AuthenticationHandler()
   public async getAllHallsByExam(event: any, _context: Context) {
     const res = await this._HallService.getAllHallsByExam(event.pathParameters.id);
+    return formatJSONResponse({ data: res });
+  }
+  @HandleException()
+  @AuthenticationHandler()
+  public async getOneHallById(event: any, _context: Context) {
+    const res = await this._HallService.getOneHallById(event.pathParameters.id);
     return formatJSONResponse({ data: res });
   }
   @HandleException()

@@ -65,4 +65,20 @@ export default {
       },
     ],
   },
+  getOneHallById: {
+    handler: `${handlerPath(__dirname)}/index.getOneHallById`,
+    events: [
+      {
+        http: {
+          method: "get",
+          path: "getOneHallById/{id}",
+        //   request: {
+        //     schema: {
+        //       "application/json": schema,
+        //     },
+        //   },
+        },
+      },
+    ],
+  },
 };
