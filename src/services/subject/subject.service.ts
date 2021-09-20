@@ -68,7 +68,7 @@ export class SubjectService {
       Subject
     );
     try {
-      return await await SubjectRepo.findAll({ where: { examId: id } });
+      return await await SubjectRepo.findAll({ where: { examId: id }, order: [['time', 'ASC']] } );
     } catch (error) {
       throw new InternalServerException("Finding all Subjects failed");
     }
