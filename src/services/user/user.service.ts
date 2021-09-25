@@ -1,4 +1,4 @@
-import { ICreateUser, ILoginRes, ILoginUser } from "@functions/user/user.interface";
+import { ICreateUser, ILoginRes, ILoginUser, providerTypes } from "@functions/user/user.interface";
 import {
   DbConnection,
   DbContext,
@@ -97,7 +97,9 @@ export class UserService {
       body.password,
       user.password
     );
-
+    if(!isMatched && user.provider !== providerTypes.email){
+      throw new UnAuthorizedException("User is already signed in with other providers");
+    }
     if (!isMatched) {
       throw new UnAuthorizedException("Inavlid Password");
     }
