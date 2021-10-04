@@ -1,4 +1,4 @@
-import { providerTypes } from "@functions/user/user.interface";
+import { providerTypes, userRoleTypes } from "@functions/user/user.interface";
 import { Column, DataType, Model, Table } from "sequelize-typescript";
 
 @Table({ underscored: true, tableName: "user" })
@@ -24,6 +24,13 @@ export class User extends Model<User> {
     defaultValue: providerTypes.email,
   })
   public provider!: providerTypes;
+
+  @Column({
+    type: DataType.STRING({ length: 10 }),
+    unique: false,
+    defaultValue: userRoleTypes.student,
+  })
+  public role!: userRoleTypes;
 
   @Column({
     type: DataType.STRING({ length: 100 }),

@@ -1,10 +1,11 @@
+import { userRoleTypes } from '@functions/user/user.interface';
 import { UserService } from 'src/services/user/user.service';
 import { CommonService } from '../services/common/common.service';
 import { DbConnection, getDbConnection } from './dbContext/_dbContext';
 import { UnAuthorizedException } from './exceptionManager';
 
 
-function authenticationHandler(): (
+function adminAuthHandler(): (
   target: object,
   functionName: string,
   descriptor: PropertyDescriptor
@@ -35,6 +36,8 @@ function authenticationHandler(): (
       const user = await new UserService(dbConnection).getUserByEmail(decode.email);
       if (!user) {
         throw new UnAuthorizedException('Unauthorized Action, Invalid Token');
+      }else if(user.role !== userRoleTypes.admin){
+        throw new UnAuthorizedException('Unauthorized Action, User doesn\'t have admin permissions');
       }
 
       args[0].user = decode;
@@ -47,4 +50,4 @@ function authenticationHandler(): (
   };
 }
 
-export { authenticationHandler as AuthenticationHandler };
+export { adminAuthHandler as AdminAuthHandler };
