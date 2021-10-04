@@ -4,6 +4,7 @@ import { HandleException } from "src/shared/exceptionManager";
 import { Context } from "aws-lambda";
 import { ICreateTimeTable, ITimeTable } from "./time_table.interface";
 import { TimeTableService } from "src/services/time_table/time_table.service";
+import { AdminAuthHandler } from "src/shared/adminAuthHandler";
 
 export class TimeTableController {
   constructor(private readonly _TimeTableService: TimeTableService) {
@@ -14,7 +15,7 @@ export class TimeTableController {
   }
 
   @HandleException()
-  @AuthenticationHandler()
+  @AdminAuthHandler()
   public async createTimeTable(event: any, _context: Context) {
     const body: ICreateTimeTable[] = event.body;
     const data: ITimeTable[] = await this._TimeTableService.createTimeTable(body);
@@ -28,13 +29,13 @@ export class TimeTableController {
     return formatJSONResponse({ data: res });
   }
   @HandleException()
-  @AuthenticationHandler()
+  @AdminAuthHandler()
   public async updateTimeTable(event: any, _context: Context) {
     const res = await this._TimeTableService.updateTimeTable(event.body);
     return formatJSONResponse({ data: res });
   }
   @HandleException()
-  @AuthenticationHandler()
+  @AdminAuthHandler()
   public async deleteTimeTable(event: any, _context: Context) {
     const res = await this._TimeTableService.deleteTimeTable(event.pathParameters.id);
     return formatJSONResponse({ data: res });

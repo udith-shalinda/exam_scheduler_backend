@@ -4,6 +4,7 @@ import { HandleException } from "src/shared/exceptionManager";
 import { Context } from "aws-lambda";
 import { SubjectService } from "src/services/subject/subject.service";
 import { ISubject } from "./subject.interface";
+import { AdminAuthHandler } from "src/shared/adminAuthHandler";
 
 export class SubjectController {
   constructor(private readonly _SubjectService: SubjectService) {
@@ -15,7 +16,7 @@ export class SubjectController {
   }
 
   @HandleException()
-  @AuthenticationHandler()
+  @AdminAuthHandler()
   public async createSubject(event: any, _context: Context) {
     const body: ISubject = event.body;
     const data: ISubject = await this._SubjectService.createSubject(body);
@@ -35,13 +36,13 @@ export class SubjectController {
     return formatJSONResponse({ data: res });
   }
   @HandleException()
-  @AuthenticationHandler()
+  @AdminAuthHandler()
   public async updateSubject(event: any, _context: Context) {
     const res = await this._SubjectService.updateSubject(event.body);
     return formatJSONResponse({ data: res });
   }
   @HandleException()
-  @AuthenticationHandler()
+  @AdminAuthHandler()
   public async deleteSubject(event: any, _context: Context) {
     const res = await this._SubjectService.deleteSubject(event.pathParameters.id);
     return formatJSONResponse({ data: res });

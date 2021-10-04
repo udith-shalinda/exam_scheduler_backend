@@ -4,6 +4,7 @@ import { HandleException } from "src/shared/exceptionManager";
 import { Context } from "aws-lambda";
 import { ExamService } from "src/services/exam/exam.service";
 import { ICreateExam, IExam } from "./exam.interface";
+import { AdminAuthHandler } from "src/shared/adminAuthHandler";
 
 export class ExamController {
   constructor(private readonly _examService: ExamService) {
@@ -14,7 +15,7 @@ export class ExamController {
   }
 
   @HandleException()
-  @AuthenticationHandler()
+  @AdminAuthHandler()
   public async createExam(event: any, _context: Context) {
     const body: ICreateExam = event.body;
     const data: IExam = await this._examService.createExam(body);
@@ -28,13 +29,13 @@ export class ExamController {
     return formatJSONResponse({ data: res });
   }
   @HandleException()
-  @AuthenticationHandler()
+  @AdminAuthHandler()
   public async updateExam(event: any, _context: Context) {
     const res = await this._examService.updateExam(event.body);
     return formatJSONResponse({ data: res });
   }
   @HandleException()
-  @AuthenticationHandler()
+  @AdminAuthHandler()
   public async deleteExam(event: any, _context: Context) {
     const res = await this._examService.deleteExam(event.pathParameters.id);
     return formatJSONResponse({ data: res });

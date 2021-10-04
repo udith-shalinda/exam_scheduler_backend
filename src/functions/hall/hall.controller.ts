@@ -4,6 +4,7 @@ import { HandleException } from "src/shared/exceptionManager";
 import { Context } from "aws-lambda";
 import { HallService } from "src/services/hall/hall.service";
 import { IHall } from "./hall.interface";
+import { AdminAuthHandler } from "src/shared/adminAuthHandler";
 
 export class HallController {
   constructor(private readonly _HallService: HallService) {
@@ -15,7 +16,7 @@ export class HallController {
   }
 
   @HandleException()
-  @AuthenticationHandler()
+  @AdminAuthHandler()
   public async createHall(event: any, _context: Context) {
     const body: IHall = event.body;
     const data: IHall = await this._HallService.createHall(body);
@@ -35,13 +36,13 @@ export class HallController {
     return formatJSONResponse({ data: res });
   }
   @HandleException()
-  @AuthenticationHandler()
+  @AdminAuthHandler()
   public async updateHall(event: any, _context: Context) {
     const res = await this._HallService.updateHall(event.body);
     return formatJSONResponse({ data: res });
   }
   @HandleException()
-  @AuthenticationHandler()
+  @AdminAuthHandler()
   public async deleteHall(event: any, _context: Context) {
     const res = await this._HallService.deleteHall(event.pathParameters.id);
     return formatJSONResponse({ data: res });

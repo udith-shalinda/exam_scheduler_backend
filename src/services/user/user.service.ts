@@ -103,10 +103,11 @@ export class UserService {
     if (!isMatched) {
       throw new UnAuthorizedException("Inavlid Password");
     }
-    const { email, username, createdAt, updatedAt } = user;
+    const { email, username, createdAt, updatedAt, role } = user;
     const token = await this._commonService.generateJWT({
       email,
       username,
+      role,
       createdAt,
       updatedAt,
     });
