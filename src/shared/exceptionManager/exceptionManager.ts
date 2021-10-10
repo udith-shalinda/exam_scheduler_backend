@@ -83,6 +83,7 @@ function exceptionHandler(): (
         //   message: error.message,
         //   stack: error.stack,
         // });
+        console.log('error', error);
         return _handlerException(error);
       }
     };

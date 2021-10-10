@@ -12,6 +12,7 @@ import pg from "pg";
 
 import { ConfigurationException } from "../exceptionManager";
 import { User, Exam, Subject, Hall, Av_Date, Av_Time, TimeTable } from "../../models";
+
 type DbContext = Sequelize;
 type TransactionScope = Transaction;
 type Repository<M> = (new () => M) & NonAbstract<typeof Model>;

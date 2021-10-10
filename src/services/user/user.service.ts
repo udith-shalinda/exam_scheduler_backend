@@ -9,7 +9,7 @@ import {
   BadRequestException,
   UnAuthorizedException,
 } from "src/shared/exceptionManager";
-import { User } from "src/models";
+import { User } from "../../models/user.model";
 import { CommonService } from "../common/common.service";
 
 export class UserService {
@@ -86,7 +86,7 @@ export class UserService {
     }
   }
   public async login(body: ILoginUser): Promise<ILoginRes | null> {
-    //   console.log(user);
+      console.log('user', body);
     const user = await this.getUserByEmail(body.email);
     
     if (!user) {
@@ -114,8 +114,11 @@ export class UserService {
     user.password = undefined;
     return { user, token };
   }
-  public async getUserByEmail(email: string): Promise<User | null> {
-    const userRepo: Repository<User> = this._dbContext.getRepository(User);
-    return await userRepo.findOne({ where: { email } });
+  public async getUserByEmail(email: string): Promise<User | null | any> {
+    // const userRepo: Repository<User> = this._dbContext.getRepository(User);
+    const [results, metadata] = await this._dbContext.query(`SELECT "id", "username", "provider", "role", "email", "password", "created_at" AS "createdAt", "updated_at" AS "updatedAt" FROM "user" AS "User" WHERE "User"."email" = '${email}';`)
+      console.log(results)
+      return results[0];
+    // return await userRepo.findOne({ where: { email } });
   }
 }
