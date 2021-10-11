@@ -1,4 +1,4 @@
-import { ICreateUser, ILoginRes, ILoginUser, providerTypes } from "@functions/user/user.interface";
+import { ICreateUser, ILoginRes, ILoginUser, providerTypes, userRoleTypes } from "@functions/user/user.interface";
 import {
   DbConnection,
   DbContext,
@@ -20,8 +20,8 @@ export class UserService {
   }
 
   public async registerUser(body: ICreateUser): Promise<boolean> {
-    const { username, email, password } = body;
-    const user = await this.getUserByEmailUsername(username, email);
+    const { username, email, password, role, provider } = body;
+    const user = await this.getUserByEmail(email);
 
     if (user) {
       if (user.username === username) {
@@ -31,7 +31,7 @@ export class UserService {
         throw new BadRequestException("Email already taken");
       }
     }
-    await this.createUser(username, password, email);
+    await this.createUser(username, password, email, role, provider);
     return true;
   }
 
@@ -61,7 +61,9 @@ export class UserService {
   private async createUser(
     username: string,
     password: string,
-    email: string
+    email: string,
+    role?: userRoleTypes,
+    provider?: providerTypes
   ): Promise<boolean> {
     try {
       const newPassword = await this._commonService.hashPassword(password);
@@ -73,10 +75,13 @@ export class UserService {
         username,
         email: email,
         password: newPassword,
+        role,
+        provider
       };
       await (await userRepo.create(body)).save();
       return true;
     } catch (err) {
+      console.log(err);
       //   const error: Error = <Error>err;
       //   this._logger.error('Error In Create User', {
       //     message: error.message,
