@@ -17,6 +17,7 @@ export class ExamController {
   @HandleException()
   @AdminAuthHandler()
   public async createExam(event: any, _context: Context) {
+    _context.callbackWaitsForEmptyEventLoop = false;
     const body: ICreateExam = event.body;
     const data: IExam = await this._examService.createExam(body);
     return formatJSONResponse({ data });
@@ -25,6 +26,7 @@ export class ExamController {
   @HandleException()
   @AuthenticationHandler()
   public async getAllExams(event: any, _context: Context) {
+    _context.callbackWaitsForEmptyEventLoop = false;
     const res = await this._examService.getAllExams();
     return formatJSONResponse({ data: res });
   }

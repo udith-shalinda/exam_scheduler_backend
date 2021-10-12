@@ -29,7 +29,7 @@ export class ExamService {
     try {
       return await (await examRepo.create(body)).save();
     } catch (error) {
-      throw new InternalServerException("Creating Exam Failed");
+      throw new InternalServerException("Creating Exam Failed"+ error);
     }
   }
   public async updateExam(examInput: IExam): Promise<boolean> {

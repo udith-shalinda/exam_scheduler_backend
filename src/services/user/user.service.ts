@@ -79,6 +79,7 @@ export class UserService {
         provider
       };
       await (await userRepo.create(body)).save();
+      // const [results, metadata] = await this._dbContext.query(`INSERT INTO "user" ("id","username","provider","role","email","password","created_at","updated_at") VALUES (DEFAULT,$1,$2,$3,$4,$5,$6,$7) RETURNING "id","username","provider","role","email","password","created_at","updated_at";`);
       return true;
     } catch (err) {
       console.log(err);
